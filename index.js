@@ -27,7 +27,18 @@ cir.draw();
 // Contrustor Function
 function Circle(radius) {
   this.radius = radius;
+
+  let = defaultLocation = {x: 0, y: 0};
+
+  let computeOptimumLocation = function() {
+    // ... magic
+  }
+
   this.draw = function() {
+    computeOptimumLocation(); //  able to be called because of closure
+
+    // defaultLocation;
+    // this.radius;
     console.log('DRAW');
   }
 }

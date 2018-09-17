@@ -267,7 +267,55 @@ if ('radius' in newCircle) {
 	console.log('Circle has a radius');
 }
 ```
+## Abstraction
+Hides complexitiy of the class, because not all members of the class should be accessible to the consumer/client
+
+* **Hide the details <|-|> Show the essentials**
 
 ### Private Properties
+A great way to hide properties and methods and keep them within the scope of the function is to create local variables within the function.
+```
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	let computeOptimumLocation = function() {
+		// ... magic
+	}
+	this.draw = function() {
+		console.log('DRAW');
+	}
+}
+```
+This is a great example of closure, which is like scope and allows variables to be created within the parent function and be called within functions inside the parent function.
+ * The difference between closure and scope is that scope is temporary, once the variables are finished being used and it goes out of the functionthey were used, they get removed. But in closure the variable persist in memory and preserve their state
+```		
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	let computeOptimumLocation = function() {
+		// ... magic
+	}
+	this.draw = function() {
+		computeOptimumLocation(); // able to be called because of closure
+		console.log('DRAW');
+	}
+}
+```
+Remember that to access those variables or functions you can just call them like normal javascript, but to access the other methods and properties in the main Contructor, you still use this.
+```
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	let computeOptimumLocation = function() {
+		// ... magic
+	}
+	this.draw = function() {
+		computeOptimumLocation();
+		defaultLocation; // hidden variable
+		this.radius;    // visible property
+		console.log('DRAW');
+	}
+}
+```
 
 ### Getters/Setters
