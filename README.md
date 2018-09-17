@@ -199,6 +199,75 @@ console.log(obj); // 11
 
 ### Working with Properties
 
+**Adding properties:**
+- A use case can be adding a token to the user object in web/mobile application
+
+To add you can simply call the class and the new property of in dot notation, like:
+```
+const newCircle = new Circle(1);
+newCircle.location = { x: 1 }
+```
+Or even with bracket notation:
+```
+newCircle['location'] = { y: 2 }
+```
+A good use for bracket notation is dynamic property evaluation at runtime by creating a variable to be the property and calling that varible within the brackets
+```
+const propertyName = 'location';
+newCircle[propertyName] = { y: 3 };
+```
+Another good use for bracket notation is when the property name has a dash in it because dot notation can't be called like that, such as:
+```
+const propertyName = 'center-location';
+```
+
+**Deleting properties:**
+- Use case would be taking off user password, credit card info when the user object is sent to the client
+
+Using the *delete* keyword:
+```
+delete circle['location'];
+```
+
+**Enumerating Properties (Iterating):**
+- In many cases it is neccessary to iterate of the object to be able to manipulate and have more dynamic power when working with objects
+
+Using the for-in loop:
+ * **keys**
+ ```
+for (let key in newCircle) {
+	console.log(key)
+}
+```
+ * **values**
+ ```
+for (let key in newCircle) {
+	console.log(key, newCircle[key])
+}
+```
+If you wish to filter out methods in the values of the object by checking the typeof:
+```
+for (let key in newCircle) {
+	if (typeof newCircle[key] !== 'function')
+	console.log(key, newCircle[key])
+}
+```
+You can also use the **Object** class which has the methods of **keys** and **values** where you pass in the object of interest and get the keys or values returned in an array:
+```
+const keys = Object.keys(newCircle);
+console.log(keys);
+
+const values = Object.values(newCircle);
+console.log(values);
+```
+
+To check if the a object has a given property or method using the in operator where the property in question is in a string as the first parameter:
+```
+if ('radius' in newCircle) {
+	console.log('Circle has a radius');
+}
+```
+
 ### Private Properties
 
 ### Getters/Setters

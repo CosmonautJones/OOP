@@ -32,7 +32,29 @@ function Circle(radius) {
   }
 }
 const newCircle = new Circle(1);
+newCircle.location = { x: 1 }
+newCircle['location'] = { y: 2 }
 
+const propertyName = 'location';
+newCircle[propertyName] = { y: 3 };
+
+delete circle['location'];
+
+for (let key in newCircle) {
+  console.log(key)
+}
+
+for (let key in newCircle) {
+  if (typeof newCircle[key] !== 'function')
+    console.log(key, newCircle[key])
+}
+
+const keys = Object.keys(newCircle);
+console.log(keys);
+
+if ('radius' in newCircle) {
+  console.log('Circle has a radius');
+}
 // -- Primatives and References -- //
 
 // Primative
