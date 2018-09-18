@@ -267,10 +267,12 @@ if ('radius' in newCircle) {
 	console.log('Circle has a radius');
 }
 ```
+---
 ## Abstraction
 Hides complexitiy of the class, because not all members of the class should be accessible to the consumer/client
 
 * **Hide the details <|-|> Show the essentials**
+
 
 ### Private Properties
 A great way to hide properties and methods and keep them within the scope of the function is to create local variables within the function.
@@ -317,5 +319,61 @@ function Circle(radius) {
 	}
 }
 ```
+---
 
 ### Getters/Setters
+One issue with using private members using local variables in the objects is that you cannot use them to display their properties. Instead you have to create a method that uses and returns that hidden member.
+```
+// Contrustor Function
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	this.defaultLocation = function() {
+		return defaultLocation;
+	}
+}
+```
+Then you could call it like so:
+```
+const newCircle = new Circle(1);
+newCircle.getDefaultLocation();
+```
+A cleaner way to do this is to use `Object.defineProperty()`:
+* Which it's first parameter is the object you want to add the new property to. In the case of where it's located, you will use this
+* The second property is the name of the property you wish to add
+* The third argument is an object, and in the object with a `key:value` pair
+
+	To get the property of that private member, use a **getter**:
+```
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	Object.defineProperty(this, "defaultLocation", {
+		get: function() {
+			return defaultLocation;
+		}
+		})
+	}
+```
+To set a property to that private member, use a **setter**
+```
+function Circle(radius) {
+	this.radius = radius;
+	let = defaultLocation = {x: 0, y: 0};
+	this.getDefaultLocation = function() {
+		return defaultLocation;
+	}
+	Object.defineProperty(this, "defaultLocation", {
+		get: function() {
+			return defaultLocation;
+		},
+		set: function(value) {
+			if ( !value.x || !value.y) {
+				throw new Error('Invalid location')
+			}
+			defaultLocation = value
+		}
+})
+```
+	Getters are READ-ONLY properties
+	Setters are for updating the property

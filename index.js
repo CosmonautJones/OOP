@@ -30,6 +30,22 @@ function Circle(radius) {
 
   let = defaultLocation = {x: 0, y: 0};
 
+  this.getDefaultLocation = function() {
+    return defaultLocation;
+  }
+
+  Object.defineProperty(this, "defaultLocation", {
+    get: function() {
+      return defaultLocation;
+    },
+    set: function(value) {
+      if ( !value.x || !value.y) {
+        throw new Error('Invalid location')
+      }
+      defaultLocation = value
+    }
+  })
+
   let computeOptimumLocation = function() {
     // ... magic
   }
@@ -43,6 +59,8 @@ function Circle(radius) {
   }
 }
 const newCircle = new Circle(1);
+newCircle.getDefaultLocation();
+
 newCircle.location = { x: 1 }
 newCircle['location'] = { y: 2 }
 
